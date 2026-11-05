@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>TK Islam Asy-Syfa</title>
+  <meta name="claude:viewport-fit-sides" content="cover">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Amiri:wght@400&display=swap">
+
+  <!-- CSS Eksternal -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ANIMASI LOADING / SPLASH SCREEN CERIA (KHUSUS TK) -->
+<div id="loader" class="loader-screen" role="dialog" aria-modal="true" aria-label="Memuat TK Islam Asy-Syfa">
+  <div class="loader-sky" aria-hidden="true">
+    <div class="loader-cloud c1"></div>
+    <div class="loader-cloud c2"></div>
+    <div class="loader-cloud c3"></div>
+    <div class="loader-float item-1">🎈</div>
+    <div class="loader-float item-2">⭐</div>
+    <div class="loader-float item-3">✨</div>
+    <div class="loader-float item-4">🌈</div>
+  </div>
+
+  <div class="loader-card">
+    <button type="button" class="loader-skip" id="loaderSkip" aria-label="Lewati animasi loading">Lewati &times;</button>
+    
+    <div class="loader-mascot-wrap">
+      <div class="loader-halo"></div>
+      <img src="logo.png" alt="Logo TK Islam Asy-Syfa" class="loader-logo">
+      <span class="loader-badge">🌸</span>
+    </div>
+
+    <div class="loader-salam">
+      <span class="salam-pill">Assalamu'alaikum! 👋</span>
+      <h2 class="loader-title">TK Islam Asy-Syfa</h2>
+      <p class="loader-tagline">Belajar Ceria, Tumbuh Berakhlak Mulia ✨</p>
+    </div>
+
+    <div class="loader-progress-box">
+      <div class="loader-bar-bg">
+        <div class="loader-bar-fill" id="loaderBar"></div>
+      </div>
+      <div class="loader-runner" id="loaderRunner">🎒</div>
+    </div>
+
+    <div class="loader-msg" id="loaderMsg">Bismillah, menyapa pagi... ☀️</div>
+    <button type="button" class="loader-enter-btn" id="loaderEnterBtn"><span>🚪 Buka Pintu Sekolah Ceria 🎶</span></button>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v14H6.5A2.5 2.5 0 0 0 4 19.5Zm0 0A2.5 2.5 0 0 0 6.5 22H20v-5"/><path d="M9 8h7"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></symbol>
+    <symbol id="i-blocks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="8" height="8" rx="2"/><rect x="13" y="12" width="8" height="8" rx="2"/><rect x="8" y="3" width="8" height="8" rx="2"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.7-.8 1.7-1.6 0-.5-.2-.9-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8Z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15"/><path d="M5 19c3-5 6-8 10-10"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7Z"/><path d="M9 10c.5 2 2 3.5 4 4"/></symbol>
+    <symbol id="i-insta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r=".6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 12.5l3 3 5-6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="3"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></symbol>
+    <symbol id="f-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.8 6 6.5.7-4.9 4.4 1.4 6.4L12 16.7 6.2 20l1.4-6.4L2.7 9.2l6.5-.7Z"/></symbol>
+    <symbol id="f-moon" viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 14.2A9 9 0 0 1 9.8 3.5a9 9 0 1 0 10.7 10.7Z"/></symbol>
+  </defs>
+</svg>
+
+<header id="top">
+  <div class="wrap bar">
+    <a class="brand" href="#beranda" aria-label="TK Islam Asy-Syfa, ke beranda">
+      <img src="logo.png" alt="Logo TK Islam Asy-Syfa" width="42" height="42">
+      <span><b>Asy-Syfa</b><small>TK Islam</small></span>
+    </a>
+    <ul class="links" id="nav">
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#program">Program</a></li>
+      <li><a href="#sehari">Sehari di Sekolah</a></li>
+      <li><a href="#galeri">Galeri</a></li>
+      <li><a href="#daftar">Pendaftaran</a></li>
+      <li class="cta"><a href="#kontak">Hubungi Kami</a></li>
+    </ul>
+    <div class="tools">
+      <button class="theme" id="theme" type="button" aria-label="Ganti mode terang atau gelap" aria-pressed="false"><span class="knob"><svg class="ic k-sun"><use href="#i-sun"/></svg><svg class="ic k-moon"><use href="#i-moon"/></svg></span></button>
+      <button class="burger" id="burger" aria-label="Buka menu" aria-expanded="false" aria-controls="nav"><svg class="ic"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="beranda">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="pill"><svg class="ic"><use href="#i-moon"/></svg> TK Islam Asy-Syfa</p>
+      <h1>Belajar ceria, <span class="hl">tumbuh</span> bersama akhlak mulia</h1>
+      <p class="sub">Di Asy-Syfa, anak-anak bermain, mengenal huruf hijaiyah, dan belajar mencintai Allah dalam suasana yang hangat dan menyenangkan.</p>
+      <div class="actions">
+        <a class="btn btn-sun" data-wa href="#kontak"><svg class="ic"><use href="#i-chat"/></svg> Tanya Pendaftaran</a>
+        <a class="btn btn-line" href="#galeri">Lihat Kegiatan <svg class="ic"><use href="#i-arrow"/></svg></a>
+      </div>
+      <ul class="chips">
+        <li style="--c:var(--sky)"><svg class="ic"><use href="#i-blocks"/></svg> Belajar sambil bermain</li>
+        <li style="--c:var(--leaf)"><svg class="ic"><use href="#i-book"/></svg> Dekat dengan Al-Qur'an</li>
+        <li style="--c:var(--coral)"><svg class="ic"><use href="#i-heart"/></svg> Adab sehari-hari</li>
+      </ul>
+    </div>
+    <div class="collage" aria-label="Foto kegiatan anak-anak">
+      <div class="sticker s-star"><svg><use href="#f-star"/></svg></div>
+      <div class="sticker s-moon"><svg><use href="#f-moon"/></svg></div>
+      <div class="sticker s-star2"><svg><use href="#f-star"/></svg></div>
+      <div class="slot c1" data-foto="hero1"></div>
+      <div class="slot c2" data-foto="hero2"></div>
+      <div class="slot c3" data-foto="hero3"></div>
+      <div class="slot c4" data-foto="hero4"></div>
+    </div>
+  </div>
+  <svg class="skyline" viewBox="0 0 1200 190" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <g fill="currentColor">
+      <path d="M0 190V140q40-30 80 0t80 0 80 0 80 0 80 0v50Z"/>
+      <circle cx="120" cy="112" r="26"/><circle cx="168" cy="122" r="20"/><circle cx="1070" cy="118" r="24"/><circle cx="1120" cy="126" r="19"/>
+      <path d="M740 190V120h280v70Z"/>
+      <path d="M770 120c0-46 34-66 70-92 36 26 70 46 70 92Z"/>
+      <path d="M838 28l2-14 2 14Z"/>
+      <rect x="722" y="60" width="20" height="130" rx="3"/><path d="M722 60l10-26 10 26Z"/>
+      <rect x="938" y="60" width="20" height="130" rx="3"/><path d="M938 60l10-26 10 26Z"/>
+      <path d="M0 190h1200v-26q-60-16-120 0t-120 0-120 0-120 0H340q-60-16-120 0T100 164 0 170Z" opacity=".55"/>
+    </g>
+  </svg>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Iqro dan Tahsin<svg><use href="#f-star"/></svg>Hafalan Doa Harian<svg><use href="#f-star"/></svg>Sholat Dhuha<svg><use href="#f-star"/></svg>Bermain Sentra<svg><use href="#f-star"/></svg>Mewarnai dan Menempel<svg><use href="#f-star"/></svg>Manasik Haji Mini<svg><use href="#f-star"/></svg>Berkebun<svg><use href="#f-star"/></svg></span>
+    <span>Iqro dan Tahsin<svg><use href="#f-star"/></svg>Hafalan Doa Harian<svg><use href="#f-star"/></svg>Sholat Dhuha<svg><use href="#f-star"/></svg>Bermain Sentra<svg><use href="#f-star"/></svg>Mewarnai dan Menempel<svg><use href="#f-star"/></svg>Manasik Haji Mini<svg><use href="#f-star"/></svg>Berkebun<svg><use href="#f-star"/></svg></span>
+  </div>
+</div>
+
+<!-- TENTANG -->
+<section class="sec" id="tentang">
+  <div class="wrap about">
+    <div class="about-photo rv"><div class="slot" data-foto="tentang"></div></div>
+    <div>
+      <p class="eyebrow rv">Tentang Kami</p>
+      <h2 class="rv">Sekolah kecil yang hangat untuk langkah pertama anak</h2>
+      <p class="lead rv">TK Islam Asy-Syfa menemani anak usia dini mengenal dunia lewat bermain, bercerita, dan meneladani akhlak Rasulullah. Guru dan orang tua berjalan bersama, supaya setiap anak tumbuh percaya diri, mandiri, dan dekat dengan Al-Qur'an.</p>
+      <div class="pillars" data-stagger>
+        <div class="pillar rv" style="--c:var(--coral);--cs:var(--coral-soft)"><i><svg class="ic"><use href="#i-heart"/></svg></i><div><h3>Akhlak mulia</h3><p>Salam, doa, berbagi, dan sopan santun dibiasakan dalam setiap kegiatan.</p></div></div>
+        <div class="pillar rv" style="--c:var(--leaf);--cs:var(--leaf-soft)"><i><svg class="ic"><use href="#i-book"/></svg></i><div><h3>Cinta Al-Qur'an</h3><p>Mengenal huruf hijaiyah dan menghafal surat pendek dengan cara yang menyenangkan.</p></div></div>
+        <div class="pillar rv" style="--c:var(--sky-deep);--cs:var(--sky-soft)"><i><svg class="ic"><use href="#i-blocks"/></svg></i><div><h3>Belajar sambil bermain</h3><p>Anak bereksplorasi lewat permainan, seni, dan alam sesuai tahap usianya.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section class="sec band" id="program">
+  <svg class="wave t" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C200 0 400 80 600 40S1000 0 1200 40V80H0Z"/></svg>
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow rv">Program Belajar</p>
+      <h2 class="rv">Apa saja yang anak pelajari?</h2>
+      <p class="lead rv">Kegiatan disusun pendek, bergantian, dan penuh gerak, supaya anak tetap semangat dari pagi sampai pulang.</p>
+    </div>
+    <div class="cards" data-stagger>
+      <article class="card rv" style="--c:var(--sky);--cs:var(--sky-soft)"><div class="ico"><svg><use href="#i-book"/></svg></div><h3>Iqro dan Tahsin</h3><p>Mengenal huruf hijaiyah, melafalkan dengan benar, lalu membaca Iqro secara bertahap.</p></article>
+      <article class="card rv" style="--c:var(--grape);--cs:var(--grape-soft)"><div class="ico"><svg><use href="#i-moon"/></svg></div><h3>Hafalan doa dan surat pendek</h3><p>Doa harian dan surat-surat pendek dilantunkan lewat lagu dan gerakan yang mudah diingat.</p></article>
+      <article class="card rv" style="--c:var(--coral);--cs:var(--coral-soft)"><div class="ico"><svg><use href="#i-heart"/></svg></div><h3>Ibadah dan adab</h3><p>Berwudhu, sholat dhuha berjamaah, adab makan, dan bersikap santun kepada teman dan guru.</p></article>
+      <article class="card rv" style="--c:var(--sun);--cs:var(--sun-soft);--ci:var(--on-sun)"><div class="ico"><svg><use href="#i-blocks"/></svg></div><h3>Calistung lewat bermain</h3><p>Baca, tulis, dan hitung diperkenalkan dengan balok, kartu, dan permainan, tanpa paksaan.</p></article>
+      <article class="card rv" style="--c:var(--leaf);--cs:var(--leaf-soft)"><div class="ico"><svg><use href="#i-palette"/></svg></div><h3>Seni dan kreativitas</h3><p>Mewarnai, menempel, melipat, dan bernyanyi untuk melatih imajinasi dan motorik halus.</p></article>
+      <article class="card rv" style="--c:var(--sky-deep);--cs:var(--sky-soft)"><div class="ico"><svg><use href="#i-leaf"/></svg></div><h3>Alam dan motorik</h3><p>Berkebun, bermain di halaman, dan kunjungan ke luar sekolah untuk mengenal ciptaan Allah.</p></article>
+    </div>
+  </div>
+  <svg class="wave b" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C200 0 400 80 600 40S1000 0 1200 40V80H0Z"/></svg>
+</section>
+
+<!-- SEHARI -->
+<section class="sec" id="sehari">
+  <div class="wrap day">
+    <div class="day-side">
+      <p class="eyebrow rv">Sehari di Asy-Syfa</p>
+      <h2 class="rv">Dari salam pagi sampai doa pulang</h2>
+      <p class="lead rv">Ritme harian yang tenang dan bergantian antara belajar, ibadah, dan bermain.</p>
+      <div class="slot rv" data-foto="sehari"></div>
+    </div>
+    <ol class="tl" data-stagger>
+      <li class="rv" style="--c:var(--sun);--ci:var(--on-sun)"><span class="dot"><svg class="ic"><use href="#i-sun"/></svg></span><div class="box"><time>07.30</time><h3>Datang dan salam</h3><p>Mencium tangan guru, mengucap salam, dan merapikan tas.</p></div></li>
+      <li class="rv" style="--c:var(--grape)"><span class="dot"><svg class="ic"><use href="#i-moon"/></svg></span><div class="box"><time>07.45</time><h3>Doa dan hafalan</h3><p>Doa harian, surat pendek, dan lagu islami bersama.</p></div></li>
+      <li class="rv" style="--c:var(--coral)"><span class="dot"><svg class="ic"><use href="#i-heart"/></svg></span><div class="box"><time>08.15</time><h3>Sholat dhuha</h3><p>Berwudhu dan sholat berjamaah dengan bimbingan guru.</p></div></li>
+      <li class="rv" style="--c:var(--sky-deep)"><span class="dot"><svg class="ic"><use href="#i-book"/></svg></span><div class="box"><time>08.45</time><h3>Belajar sambil bermain</h3><p>Iqro, huruf, angka, dan sentra bermain yang bergiliran.</p></div></li>
+      <li class="rv" style="--c:var(--leaf)"><span class="dot"><svg class="ic"><use href="#i-leaf"/></svg></span><div class="box"><time>09.45</time><h3>Makan bersama</h3><p>Berdoa, makan sendiri, dan belajar adab makan.</p></div></li>
+      <li class="rv" style="--c:var(--sun);--ci:var(--on-sun)"><span class="dot"><svg class="ic"><use href="#i-palette"/></svg></span><div class="box"><time>10.15</time><h3>Seni dan motorik</h3><p>Mewarnai, menempel, atau bermain di halaman.</p></div></li>
+      <li class="rv" style="--c:var(--grape)"><span class="dot"><svg class="ic"><use href="#i-moon"/></svg></span><div class="box"><time>10.45</time><h3>Doa pulang</h3><p>Doa penutup, salam, lalu pulang dengan ceria.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- GALERI -->
+<section class="sec band gal" id="galeri">
+  <svg class="wave t" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C200 0 400 80 600 40S1000 0 1200 40V80H0Z"/></svg>
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow rv">Galeri Kegiatan</p>
+      <h2 class="rv">Keseruan anak-anak kami</h2>
+      <p class="lead rv">Ketuk foto untuk melihat lebih besar.</p>
+    </div>
+    <div class="tabs rv" role="group" aria-label="Filter galeri">
+      <button class="tab" type="button" data-kat="semua" aria-pressed="true">Semua</button>
+      <button class="tab" type="button" data-kat="Belajar" aria-pressed="false">Belajar</button>
+      <button class="tab" type="button" data-kat="Ibadah" aria-pressed="false">Ibadah</button>
+      <button class="tab" type="button" data-kat="Bermain" aria-pressed="false">Bermain</button>
+      <button class="tab" type="button" data-kat="Acara" aria-pressed="false">Acara</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+  <svg class="wave b" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C200 0 400 80 600 40S1000 0 1200 40V80H0Z"/></svg>
+</section>
+
+<!-- PENDAFTARAN -->
+<section class="sec" id="daftar">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow rv">Pendaftaran</p>
+      <h2 class="rv">Empat langkah menjadi bagian dari Asy-Syfa</h2>
+    </div>
+    <ol class="steps" data-stagger>
+      <li class="step rv" style="--c:var(--sky-deep)"><span class="n">1</span><h3>Hubungi kami</h3><p>Kirim pesan WhatsApp untuk menanyakan kelas, jadwal, dan formulir.</p></li>
+      <li class="step rv" style="--c:var(--coral)"><span class="n">2</span><h3>Kenalan di sekolah</h3><p>Datang bersama anak untuk melihat suasana kelas dan bertemu guru.</p></li>
+      <li class="step rv" style="--c:var(--sun);--ci:var(--on-sun)"><span class="n">3</span><h3>Lengkapi berkas</h3><p>Isi formulir dan serahkan dokumen yang dibutuhkan.</p></li>
+      <li class="step rv" style="--c:var(--leaf)"><span class="n">4</span><h3>Mulai belajar</h3><p>Anak mengikuti masa pengenalan lalu bergabung di kelasnya.</p></li>
+    </ol>
+    <div class="reg">
+      <div class="panel rv">
+        <h3>Berkas yang disiapkan</h3>
+        <ul class="check">
+          <li><svg class="ic"><use href="#i-check"/></svg> Fotokopi akta kelahiran anak</li>
+          <li><svg class="ic"><use href="#i-check"/></svg> Fotokopi Kartu Keluarga</li>
+          <li><svg class="ic"><use href="#i-check"/></svg> Pas foto anak</li>
+          <li><svg class="ic"><use href="#i-check"/></svg> Formulir pendaftaran yang sudah diisi</li>
+        </ul>
+      </div>
+      <div class="panel rv">
+        <h3>Pertanyaan umum</h3>
+        <details open><summary>Berapa usia anak yang bisa mendaftar? <svg class="ic"><use href="#i-down"/></svg></summary><p>Umumnya anak usia 4 sampai 6 tahun. Untuk memastikan, tanyakan langsung kepada kami.</p></details>
+        <details><summary>Jam belajarnya kapan? <svg class="ic"><use href="#i-down"/></svg></summary><p data-jam></p></details>
+        <details><summary>Berapa biayanya? <svg class="ic"><use href="#i-down"/></svg></summary><p>Rincian biaya kami sampaikan langsung saat konsultasi. Silakan hubungi kami lewat WhatsApp.</p></details>
+        <details><summary>Boleh berkunjung dulu? <svg class="ic"><use href="#i-down"/></svg></summary><p>Boleh. Orang tua dan anak dipersilakan datang untuk melihat suasana sekolah.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section class="sec band contact" id="kontak">
+  <svg class="wave t" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C200 0 400 80 600 40S1000 0 1200 40V80H0Z"/></svg>
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow rv">Hubungi Kami</p>
+      <h2 class="rv">Kami senang bertemu Ayah dan Bunda</h2>
+    </div>
+    <div class="contact-grid" data-stagger>
+      <div class="info rv" style="--c:var(--coral);--cs:var(--coral-soft)"><i><svg class="ic"><use href="#i-pin"/></svg></i><div><h3>Alamat</h3><p data-alamat></p><a class="mini" id="maps" target="_blank" rel="noopener"><svg class="ic"><use href="#i-arrow"/></svg> Buka di Google Maps</a></div></div>
+      <div class="info rv" style="--c:var(--sky-deep);--cs:var(--sky-soft)"><i><svg class="ic"><use href="#i-clock"/></svg></i><div><h3>Jam belajar</h3><p data-jam></p></div></div>
+      <div class="info rv" style="--c:var(--leaf);--cs:var(--leaf-soft)"><i><svg class="ic"><use href="#i-chat"/></svg></i><div><h3>WhatsApp</h3><p data-wa-text></p><button class="mini" type="button" data-copy="wa"><svg class="ic"><use href="#i-copy"/></svg> <span>Salin nomor</span></button></div></div>
+      <div class="info rv" id="igCard" style="--c:var(--grape);--cs:var(--grape-soft)" hidden><i><svg class="ic"><use href="#i-insta"/></svg></i><div><h3>Instagram</h3><p data-ig></p><a class="mini" id="igLink" target="_blank" rel="noopener"><svg class="ic"><use href="#i-arrow"/></svg> Buka Instagram</a></div></div>
+    </div>
+    <div class="cta-band rv">
+      <div><h2>Yuk, kenalan dulu dengan Asy-Syfa</h2><p>Ceritakan kebutuhan anak Anda, kami dengan senang hati menjawab.</p></div>
+      <a class="btn btn-sun" data-wa href="#kontak"><svg class="ic"><use href="#i-chat"/></svg> Chat WhatsApp</a>
+    </div>
+  </div>
+  <svg class="wave b" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C200 0 400 80 600 40S1000 0 1200 40V80H0Z"/></svg>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="ar" lang="ar">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+    <p>TK Islam Asy-Syfa. Tumbuh ceria, berakhlak mulia.</p>
+    <p class="copy">&copy; <span id="yr"></span> TK Islam Asy-Syfa</p>
+  </div>
+</footer>
+
+<div class="cur" id="cur" aria-hidden="true"><svg><use href="#f-star"/></svg></div>
+<div id="fx" aria-hidden="true"></div>
+
+<!-- Lightbox -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Foto kegiatan" hidden>
+  <div class="lb-stage">
+    <button class="x" type="button" id="lbX" aria-label="Tutup"><svg class="ic"><use href="#i-x"/></svg></button>
+    <button class="pv" type="button" id="lbP" aria-label="Foto sebelumnya"><svg class="ic"><use href="#i-left"/></svg></button>
+    <div class="slot lb-slot"></div>
+    <button class="nx" type="button" id="lbN" aria-label="Foto berikutnya"><svg class="ic"><use href="#i-right"/></svg></button>
+  </div>
+  <div class="lb-info"><span id="lbCap"></span><small id="lbCnt"></small></div>
+</div>
+
+<!-- Audio BGM -->
+<audio id="bgmAudio" src="lagu.mp3" loop preload="auto" autoplay></audio>
+
+<!-- Widget Pemutar Musik Ceria -->
+<div class="music-pill" id="musicWidget">
+  <button type="button" class="btn-music" id="musicToggle" aria-label="Putar atau jeda musik" aria-pressed="false">
+    <span class="music-disc">🎵</span>
+    <span class="music-label">Musik Ceria</span>
+    <span class="music-waves" aria-hidden="true">
+      <i></i><i></i><i></i><i></i>
+    </span>
+  </button>
+  <div class="music-tooltip" id="musicTooltip">Musik Ceria Asy-Syfa 🎶</div>
+</div>
+
+  <!-- JavaScript Eksternal -->
+  <script src="js/script.js"></script>
+</body>
+</html>
