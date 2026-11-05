@@ -1,7 +1,7 @@
 /* tema awal: pilihan tersimpan, lalu pengaturan perangkat */
 (function(){
   var t = null;
-  try { t = localStorage.getItem('asysyfa-theme'); } catch(e){}
+  try { t = localStorage.getItem('asysyifa-theme'); } catch(e){}
   var r = document.documentElement;
   if (!t) t = r.getAttribute('data-theme') || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   r.setAttribute('data-theme', t);
@@ -13,10 +13,10 @@
 const CONFIG = {
   wa: '',                                   // nomor WhatsApp format 628xxxxxxxxxx (tanpa + dan spasi)
   waTampil: '0812-xxxx-xxxx',               // nomor yang ditampilkan di halaman
-  waText: 'Assalamualaikum, saya ingin bertanya tentang pendaftaran TK Islam Asy-Syfa.',
-  alamat: 'Alamat lengkap TK Islam Asy-Syfa',
+  waText: 'Assalamualaikum, saya ingin bertanya tentang pendaftaran TK ISLAM ASY-SYIFA.',
+  alamat: 'Alamat lengkap TK ISLAM ASY-SYIFA',
   jam: 'Senin sampai Jumat, pukul 07.30 sampai 10.45 WIB',
-  instagram: ''                             // contoh: 'tkasysyfa' (tanpa @). Kosongkan jika belum ada.
+  instagram: ''                             // contoh: 'tkasysyifa' (tanpa @). Kosongkan jika belum ada.
 };
 
 /* ============================================================
@@ -161,7 +161,7 @@ $$('[data-wa]').forEach(a => { a.href = waHref; if (CONFIG.wa) { a.target = '_bl
 $$('[data-wa-text]').forEach(p => p.textContent = CONFIG.waTampil);
 $$('[data-alamat]').forEach(p => p.textContent = CONFIG.alamat);
 $$('[data-jam]').forEach(p => p.textContent = CONFIG.jam);
-$('#maps').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('TK Islam Asy-Syfa ' + CONFIG.alamat);
+$('#maps').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('TK ISLAM ASY-SYIFA ' + CONFIG.alamat);
 if (CONFIG.instagram) {
   $('#igCard').hidden = false;
   $('[data-ig]').textContent = '@' + CONFIG.instagram;
@@ -198,7 +198,7 @@ $$('.links a').forEach(a => a.addEventListener('click', () => {
 const root = document.documentElement, themeBtn = $('#theme');
 const mqDark = matchMedia('(prefers-color-scheme: dark)');
 let savedTheme = null;
-try { savedTheme = localStorage.getItem('asysyfa-theme'); } catch (e) {}
+try { savedTheme = localStorage.getItem('asysyifa-theme'); } catch (e) {}
 function applyTheme(t) {
   root.setAttribute('data-theme', t);
   themeBtn.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
@@ -227,7 +227,7 @@ function burst(x, y, n) {
 themeBtn.addEventListener('click', e => {
   const t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   savedTheme = t;
-  try { localStorage.setItem('asysyfa-theme', t); } catch (err) {}
+  try { localStorage.setItem('asysyifa-theme', t); } catch (err) {}
   root.classList.add('tt');
   applyTheme(t);
   setTimeout(() => root.classList.remove('tt'), 700);
@@ -280,6 +280,7 @@ if ('IntersectionObserver' in window) {
    ============================================================ */
 let bgm = null;
 let bgmPlaying = false;
+let isAttemptingPlay = false;
 
 function initBgm() {
   if (bgm) return bgm;
@@ -302,13 +303,15 @@ function updateMusicUI(isPlaying) {
 }
 
 function playBgm() {
-  if (bgmPlaying) return;
+  if (bgmPlaying || isAttemptingPlay) return;
   const audio = initBgm();
   audio.volume = 0.5;
+  isAttemptingPlay = true;
   const promise = audio.play();
   if (promise !== undefined) {
     promise.then(() => {
       bgmPlaying = true;
+      isAttemptingPlay = false;
       updateMusicUI(true);
       removeAutoplayGuards();
       const tooltip = document.getElementById('musicTooltip');
@@ -318,8 +321,11 @@ function playBgm() {
       }
     }).catch(() => {
       bgmPlaying = false;
+      isAttemptingPlay = false;
       updateMusicUI(false);
     });
+  } else {
+    isAttemptingPlay = false;
   }
 }
 
@@ -327,7 +333,9 @@ function pauseBgm() {
   if (!bgm) return;
   bgm.pause();
   bgmPlaying = false;
+  isAttemptingPlay = false;
   updateMusicUI(false);
+  removeAutoplayGuards();
 }
 
 function toggleBgm() {
@@ -346,8 +354,18 @@ if (musicToggleBtn) {
   });
 }
 
-// Handler penjaga: menangkap klik/sentuhan PERTAMA di MANA SAJA di seluruh layar
-const GESTURE_EVENTS = ['click', 'pointerup', 'touchend', 'keydown'];
+// Handler penjaga: menangkap scroll, geser layar hp (touch scroll), roda mouse, dan ketukan
+const GESTURE_EVENTS = [
+  'scroll',
+  'wheel',
+  'touchmove',
+  'touchstart',
+  'touchend',
+  'pointerdown',
+  'pointerup',
+  'click',
+  'keydown'
+];
 
 function onPageInteraction() {
   if (!bgmPlaying) {
@@ -369,7 +387,7 @@ function removeAutoplayGuards() {
   });
 }
 
-// Pasang penjaga & langsung coba autoplay sejak baris ini dieksekusi
+// Pasang penjaga & langsung coba autoplay sejak awal
 addAutoplayGuards();
 playBgm();
 window.addEventListener('load', playBgm);
@@ -384,7 +402,6 @@ document.addEventListener('DOMContentLoaded', playBgm);
   const runner = document.getElementById('loaderRunner');
   const msg = document.getElementById('loaderMsg');
   const skipBtn = document.getElementById('loaderSkip');
-  const enterBtn = document.getElementById('loaderEnterBtn');
 
   if (!loader || !bar || !runner || !msg) return;
 
@@ -407,7 +424,7 @@ document.addEventListener('DOMContentLoaded', playBgm);
     isClosed = true;
     clearTimeout(autoTimer);
 
-    // Pastikan lagu langsung berputar
+    // Coba putar lagu saat loader ditutup
     playBgm();
 
     // Letupan bintang perayaan
@@ -432,13 +449,10 @@ document.addEventListener('DOMContentLoaded', playBgm);
       currentStep++;
 
       if (pct === 100) {
-        if (enterBtn) {
-          enterBtn.classList.add('show');
-        }
-        // Masuk otomatis dalam 2.5 detik jika tidak disentuh
-        autoTimer = setTimeout(closeLoader, 2500);
+        // Langsung terbuka otomatis tanpa harus tekan tombol pintu
+        autoTimer = setTimeout(closeLoader, 500);
       } else {
-        setTimeout(advance, 350 + Math.random() * 100);
+        setTimeout(advance, 320 + Math.random() * 80);
       }
     }
   }
@@ -446,9 +460,10 @@ document.addEventListener('DOMContentLoaded', playBgm);
   document.body.classList.add('loading-active');
   setTimeout(advance, 200);
 
-  if (enterBtn) enterBtn.addEventListener('click', closeLoader);
   if (skipBtn) skipBtn.addEventListener('click', closeLoader);
   loader.addEventListener('click', onPageInteraction, { passive: true });
+  loader.addEventListener('touchstart', onPageInteraction, { passive: true });
+  loader.addEventListener('touchmove', onPageInteraction, { passive: true });
   loader.addEventListener('touchend', onPageInteraction, { passive: true });
 })();
 
