@@ -792,5 +792,40 @@ body.loading-active {
   transform: translateY(0);
 }
 
+/* Balon ajakan ramah & animasi tombol saat audio menunggu klik di PC */
+.music-tooltip.prompt {
+  background: linear-gradient(135deg, var(--coral), var(--sun));
+  color: #fff;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 8px 22px rgba(255, 106, 92, 0.4);
+  animation: tooltipBounce 2s infinite ease-in-out;
+}
+
+.music-tooltip.prompt::after {
+  border-color: var(--coral) transparent transparent;
+}
+
+@keyframes tooltipBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.btn-music.prompt-play {
+  border-color: var(--coral);
+  animation: promptPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes promptPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 24px rgba(255, 106, 92, 0.25);
+  }
+  50% {
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 12px 28px rgba(255, 106, 92, 0.5);
+  }
+}
+
 
 

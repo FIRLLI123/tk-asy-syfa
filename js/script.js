@@ -281,6 +281,7 @@ if ('IntersectionObserver' in window) {
 let bgm = null;
 let bgmPlaying = false;
 let isAttemptingPlay = false;
+let tooltipTimer = null;
 
 function initBgm() {
   if (bgm) return bgm;
@@ -288,6 +289,37 @@ function initBgm() {
   bgm.loop = true;
   bgm.volume = 0.5;
   return bgm;
+}
+
+function showMusicPrompt() {
+  if (bgmPlaying) return;
+  const tooltip = document.getElementById('musicTooltip');
+  const toggleBtn = document.getElementById('musicToggle');
+  if (tooltip) {
+    tooltip.textContent = 'Klik untuk putar lagu ceria 🎵';
+    tooltip.classList.add('prompt');
+    tooltip.classList.add('show');
+    clearTimeout(tooltipTimer);
+    tooltipTimer = setTimeout(() => {
+      if (!bgmPlaying) {
+        tooltip.classList.remove('show');
+      }
+    }, 6000);
+  }
+  if (toggleBtn) {
+    toggleBtn.classList.add('prompt-play');
+  }
+}
+
+function clearMusicPrompt() {
+  const tooltip = document.getElementById('musicTooltip');
+  const toggleBtn = document.getElementById('musicToggle');
+  if (tooltip) {
+    tooltip.classList.remove('prompt');
+  }
+  if (toggleBtn) {
+    toggleBtn.classList.remove('prompt-play');
+  }
 }
 
 function updateMusicUI(isPlaying) {
@@ -312,17 +344,23 @@ function playBgm() {
     promise.then(() => {
       bgmPlaying = true;
       isAttemptingPlay = false;
+      clearMusicPrompt();
       updateMusicUI(true);
       removeAutoplayGuards();
       const tooltip = document.getElementById('musicTooltip');
       if (tooltip) {
+        tooltip.textContent = 'Musik Ceria Asy-Syifa 🎶';
+        tooltip.classList.remove('prompt');
         tooltip.classList.add('show');
-        setTimeout(() => tooltip.classList.remove('show'), 3000);
+        clearTimeout(tooltipTimer);
+        tooltipTimer = setTimeout(() => tooltip.classList.remove('show'), 3000);
       }
     }).catch(() => {
       bgmPlaying = false;
       isAttemptingPlay = false;
       updateMusicUI(false);
+      // Browser memblokir audio (misal scroll mouse PC tanpa klik) -> Tampilkan balon ramah
+      showMusicPrompt();
     });
   } else {
     isAttemptingPlay = false;
@@ -334,6 +372,7 @@ function pauseBgm() {
   bgm.pause();
   bgmPlaying = false;
   isAttemptingPlay = false;
+  clearMusicPrompt();
   updateMusicUI(false);
   removeAutoplayGuards();
 }
@@ -351,6 +390,14 @@ if (musicToggleBtn) {
   musicToggleBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     toggleBgm();
+  });
+}
+
+const musicTooltipEl = document.getElementById('musicTooltip');
+if (musicTooltipEl) {
+  musicTooltipEl.addEventListener('click', (e) => {
+    e.stopPropagation();
+    playBgm();
   });
 }
 
